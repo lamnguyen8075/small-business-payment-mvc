@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-starbucks-client-deployment
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      name: spring-starbucks
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      # unlike pod.yaml, the name is not included in the meta data as a unique name is
+      # generated from the deployment name
+      labels:
+        name: spring-starbucks
+    spec:
+      containers:
+        - name: spring-starbucks
+          image: hungnguyen4785/spring-starbucks:v2.0
+          ports:
+            - containerPort: 8081
+          livenessProbe:
+            httpGet:
+              path: /login
+              port: 8081
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /login
+              port: 8081
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          env:
+            - name: STARBUCKS_CLIENT_APIKEY
+              value: ${API_KEY:2H3fONTa8ugl1IcVS7CjLPnPIS2Hp9dJ}
+            - name: STARBUCKS_CLIENT_APIHOST
+              value: ${API_HOST:34.122.210.25/api}
+            - name: STARBUCKS_CLIENT_REGISTER
+              value: ${REGISTER:5012349}

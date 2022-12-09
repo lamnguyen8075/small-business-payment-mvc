@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<html>
+
+<head>
+    <title>STARBUCKS REST API CLIENT</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+<style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+
+    /* Full-width input fields */
+    input[type=text], input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    /* Set a style for all buttons */
+    button {
+        background-color: #04AA6D;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    submit {
+        background-color: #04AA6D;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    button:hover {
+        opacity: 0.8;
+    }
+
+    submit:hover {
+        opacity: 0.8;
+    }
+
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+        width: auto;
+        padding: 10px 18px;
+        background-color: #f44336;
+    }
+
+    /* Center the image and position the close button */
+    .imgcontainer {
+        text-align: center;
+        margin: 24px 0 12px 0;
+        position: relative;
+    }
+
+    img.avatar {
+        width: 40%;
+        border-radius: 50%;
+    }
+
+    .container {
+        padding: 16px;
+    }
+
+    span.psw {
+        float: right;
+        padding-top: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        padding-top: 60px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button (x) */
+    .close {
+        position: absolute;
+        right: 25px;
+        top: 0;
+        color: #000;
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: red;
+        cursor: pointer;
+    }
+
+    /* Add Zoom Animation */
+    .animate {
+        -webkit-animation: animatezoom 0.6s;
+        animation: animatezoom 0.6s
+    }
+
+    @-webkit-keyframes animatezoom {
+        from {-webkit-transform: scale(0)}
+        to {-webkit-transform: scale(1)}
+    }
+
+    @keyframes animatezoom {
+        from {transform: scale(0)}
+        to {transform: scale(1)}
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+        span.psw {
+            display: block;
+            float: none;
+        }
+        .cancelbtn {
+            width: 100%;
+        }
+    }
+    .navbar {
+        overflow: hidden;
+        background-color: #333;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .navbar a {
+        float: left;
+        font-size: 16px;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    .dropdown {
+        float: left;
+        overflow: hidden;
+    }
+
+    .dropdown .dropbtn {
+        cursor: pointer;
+        font-size: 16px;
+        border: none;
+        outline: none;
+        color: white;
+        padding: 14px 16px;
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+    }
+
+    .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
+        background-color: red;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #ddd;
+    }
+
+    .show {
+        display: block;
+    }
+</style>
+<body>
+<!--
+<h1 align="center"><img src="https://images.crowdspring.com/blog/wp-content/uploads/2022/09/07052909/62bc70073fd3864405fe0551_starbucks-logo-1992-2011.png" alt="Drink 1" width="120" height="75"></h1>
+-->
+
+<!--PROCESSING LOGIN-->
+<div style=" justify-content: center;display: flex;">
+    <table >
+        <form name="form" th:object="${command}" method="post" action="">
+            <tr>
+                <!--https://www.groundstobrew.com/wp-content/uploads/2021/08/starbucks-chocolate-drinks.jpg-->
+                <th><img src="https://coffeeatthree.com/wp-content/uploads/starbucks-secret-menu-1.jpg" alt="Drink 1" width="220" height="300"></th>
+                <th><img src="https://www.groundstobrew.com/wp-content/uploads/2021/08/starbucks-chocolate-drinks.jpg" alt="Drink 1" width="220" height="300"></th>
+                <th><img src="https://coffeeatthree.com/wp-content/uploads/starbucks-secret-menu-1.jpg" alt="Drink 1" width="220" height="300"></th>
+                <th rowspan="1">
+                    <pre align="left" id="pre">
+                        <span th:text="${message}"></span>
+                    </pre>
+                </th>
+            </tr>
+            <tr>
+                <td style="background-color: #04AA6D;color: white;padding: 14px 20px;margin: 4px 0;border: none;cursor: pointer; width: 100%;">
+                    <label for="drink">Select Drink:</label>
+                    <select name="drink" id="drink" th:field="*{drink}">
+                        <option value="Caffe Latte">Caffe Latte</option>
+                        <option value="Caffe Americano">Caffe Americano</option>
+                        <option value="Caffe Mocha">Caffe Mocha</option>
+                        <option value="Espresso">Espresso</option>
+                        <option value="Cappuccino">Cappuccino</option>
+                    </select>
+                </td>
+                <td style="background-color: #04AA6D;color: white;padding: 14px 20px;margin: 4px 0;border: none;cursor: pointer; width: 100%;">                    <label for="size">Select Size:</label>
+                    <select name="size" id="size" th:field="*{size}">
+                        <option value="Short">Short</option>
+                        <option value="Tall">Tall</option>
+                        <option value="Grande">Grande</option>
+                        <option value="Venti">Venti</option>
+                        <option value="Your Own Cup">Your Own Cup</option>
+                    </select>
+                </td>
+                <td style="background-color: #04AA6D;color: white;padding: 14px 20px;margin: 4px 0;border: none;cursor: pointer; width: 100%;">                    <label for="milk">Milk Type:</label>
+                    <select name="milk" id="milk" th:field="*{milk}">
+                        <option value="Whole">Whole</option>
+                        <option value="Soy">Soy</option>
+                        <option value="Nonfat">Non-fat</option>
+                        <option value="Almond">Almond</option>
+                        <option value="2%">2%</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">====================================PROCESSING====================================</td>
+            </tr>
+            <tr>
+                <td><button type="submit" name="action" id="ping" value="PING">PING</button></td>
+                <td><button type="submit" name="action" id="neworder" value="NEW ORDER">NEW ORDER</button></td>
+                <td><button type="submit" name="action" id="pay" value="PAY">PAY</button></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">Card Number</td>
+                <td colspan="2"><input type="text"  th:field="*{cardnum}"/></td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">Card Code</td>
+                <td colspan="2"><input type="text"  th:field="*{cardcode}"/></td>
+            </tr>
+            <tr>
+                <td colspan="3"><button  type="submit" name="action" id="activate" value="ACTIVATE CARD">ACTIVATE CARD</button></td>
+            </tr>
+            <tr>
+                <td colspan="3"><button type="submit" name="action" id="newcard" value="NEW CARD">NEW CARD</button></td>
+            </tr>
+    </table>
+    </form>
+</div>
+
+
+
+<!-- FORM SECTION -->
+<!--
+<form name="form" th:object="${command}" method="post" action="">
+    <p align="center">
+        <input type="submit" name="action" id="ping" value="PING">
+        <input type="submit" name="action" id="newcard" value="NEW CARD">&nbsp;&nbsp;&nbsp;
+        <input type="submit" name="action" id="activate" value="ACTIVATE CARD">
+        &nbsp;Card #:&nbsp;<input type="text"  th:field="*{cardnum}"/>
+        &nbsp;Card Code:&nbsp;<input type="text" th:field="*{cardcode}"/>
+        &nbsp;<input type="submit" name="action" id="neworder" value="NEW ORDER">
+        &nbsp;<input type="submit" name="action" id="pay" value="PAY">
+    </p>
+    <p>
+    <table id="msg" align="center" style="width:75%">
+        <tr>
+            <td>
+          <pre align="left" id="pre">
+          <span th:text="${message}"></span>
+          </pre>
+            </td>
+        </tr>
+    </table>
+    </p>
+    <br/>
+</form>
+ -->
+<!-- END FORM SECTION -->
+
+</body>
+</html>

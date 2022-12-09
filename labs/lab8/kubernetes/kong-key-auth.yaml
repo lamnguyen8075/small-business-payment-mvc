@@ -1,0 +1,13 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: kong-key-auth
+plugin: key-auth
+
+1. Describe what social media platform you are investigating and the country in which it is being used.
+
+2. Explain: what reasons can you think of for why it exists?; how was it made?; who made it?; and for whom was it made?
+
+3. Try to list specific values that best explain the intentions behind the social media platform that you picked (using Cook's concept of a 'values infrastructure'). Consider the intentions behind the design (as you perceive them) and the intentions of the targeted end users. Looking ahead, can you anticipate or foresee unintentional consequences as a result of the platform (e.g., due to differences between the values and intentions/commitments of the designers -- including their view of the users -- versus the actual values and intentions of the end users)? And again looking ahead, can you foresee whether the platform will be used ethically or unethically (e.g., does the technology promote the general flourishing of all users, OR, does it include affordances that can be exploited by some, perhaps for an idea of personal gain, that likely or even necessarily harms others)?
+
+4. Give a reasoned defense for how you reached your conclusions and defend your position appealing to the theories of technology, in relation to the evolution of society, as discussed in class and readings. [A reasoned defense is a claim/conclusion, evidence and sources, and an argument that uses the evidence to support/justify the claim. At times a reasoned defense must rule out alternatives or show they are unlikely.]
